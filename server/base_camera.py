@@ -1,6 +1,7 @@
 import time
 import threading
 import cv2
+
 try:
     from greenlet import getcurrent as get_ident
 except ImportError:
@@ -14,6 +15,7 @@ class CameraEvent(object):
     """An Event-like class that signals all active clients when a new frame is
     available.
     """
+
     def __init__(self):
         self.events = {}
 
@@ -84,12 +86,12 @@ class BaseCamera(object):
     @staticmethod
     def frames():
         """"Generator that returns frames from the camera."""
-        raise RuntimeError('Must be implemented by subclasses.')
+        raise RuntimeError("Must be implemented by subclasses.")
 
     @classmethod
     def _thread(cls):
         """Camera background thread."""
-        print('Starting camera thread.')
+        print("Starting camera thread.")
         frames_iterator = cls.frames()
         for frame in frames_iterator:
             BaseCamera.frame = frame
