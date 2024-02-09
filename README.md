@@ -21,10 +21,14 @@ Se especifica Angulo maximo y minimo y el valor inicial.
 | Servo  | Pin | Min | Max | Inicial |
 |--------|-----|-----|-----|---------|
 | Pinza  | 15  | 0   | 90  | 90      |
-| Muñeca | 14  | 0   | 180 | 75      |
+| Muñeca | 14  | 0   | 180 | 80      |
 | Codo   | 13  | 0   | 135 | 110     |
 | Brazo  | 12  | 0   | 180 | 120     |
 | Cámara | 11  | 70  | 120 | 110     |
 
 La posicion inicial tambien será la posicion Home. Aparte he tenido que programar los servos por mi
 cuenta ya que creo que tengo dos servos defectuosos que causan el reinicio de la raspberry pi.
+
+### Motores
+Se ha hecho otra interfaz un poco más clara para controlar los motores, el angulo en la trayectoria
+se especificará a través de ROS.
