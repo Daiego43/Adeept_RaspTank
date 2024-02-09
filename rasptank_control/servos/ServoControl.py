@@ -3,8 +3,8 @@ Modulo para controlar e instanciar los Servos utilizando
 la libreria Adafruit_PCA9685 (Descargar esta librería por si desaparece de internet)
 """
 
-import Adafruit_PCA9685  # Import the library used to communicate with PCA9685
 import time
+import Adafruit_PCA9685  # Import the library used to communicate with PCA9685
 
 class Servo:
     pwm = Adafruit_PCA9685.PCA9685()  # Instantiate the object used to control the PWM
@@ -64,6 +64,9 @@ def init_pos_servos():
     codo = Servo(13, "codo", min_angle=0, max_angle=135, home_angle=110)
     brazo = Servo(12, "brazo", min_angle=0, max_angle=180, home_angle=120)
     camara = Servo(11, "camara", min_angle=70, max_angle=120, home_angle=110)
+
+
+
     return pinza, muneca, codo, brazo, camara
 
 

@@ -18,8 +18,8 @@ class Motor:
         GPIO.setup(self.en, GPIO.OUT)
         self.stop()
         self.pwm = GPIO.PWM(self.en, 1000)
+        print("Motor Motor: " + self.wheel)
         time.sleep(1)
-        print("Motor " + self.wheel + " inicializado")
 
     def stop(self):
         GPIO.output(self.pin1, GPIO.LOW)
@@ -59,30 +59,3 @@ class LeftWheel(Motor):
 class RightWheel(Motor):
     def __init__(self):
         super().__init__("right", 14, 15, 4)
-
-
-class Tank:
-    def __init__(self):
-        self.left = LeftWheel()
-        self.right = RightWheel()
-
-    def forward(self, speed, radius=1):
-        self.left.forward(speed, radius)
-        self.right.forward(speed, radius)
-
-    def backward(self, speed, radius=1):
-        self.left.backward(speed, radius)
-        self.right.backward(speed, radius)
-
-    def stop(self):
-        self.left.stop()
-        self.right.stop()
-
-if __name__ == '__main__':
-    tank = Tank()
-    tank.forward(50)
-    time.sleep(5)
-    tank.backward(50)
-    time.sleep(5)
-    tank.stop()
-    print("terminado test")
