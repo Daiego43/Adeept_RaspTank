@@ -3,7 +3,7 @@ from motores import MotorControl
 from ultrasonido import Ultrasonic
 from camara import Camera
 from siguelinea import LineFollower
-
+import time
 
 class Rasptank:
     def __init__(self):
@@ -50,4 +50,6 @@ class Rasptank:
 
 
 if __name__ == '__main__':
-    pass
+    rasptank = Rasptank()
+    rasptank.move_forward()
+    time.sleep(2)
