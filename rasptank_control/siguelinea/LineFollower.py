@@ -7,7 +7,7 @@ line_pin_middle = 16
 line_pin_left = 20
 
 class LineFollower:
-    def __init__(self, right_pin, middle_pin, left_pin):
+    def __init__(self, right_pin=19, middle_pin=16, left_pin=20):
         # Inicializa los sensores de línea
         self.sensor_right = LineSensor(right_pin)
         self.sensor_middle = LineSensor(middle_pin)
@@ -22,7 +22,7 @@ class LineFollower:
         return status_right, status_middle, status_left
 
 if __name__ == "__main__":
-    line_follower = LineFollower(line_pin_right, line_pin_middle, line_pin_left)
+    line_follower = LineFollower()
     while True:
         status_right, status_middle, status_left = line_follower.get_status()
         print(f"Right: {status_right}, Middle: {status_middle}, Left: {status_left}")

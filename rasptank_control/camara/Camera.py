@@ -11,6 +11,7 @@ class Camera:
         return None
 
     def save_frame(self, filename):
+        filename = "rasptank_control/camara/" + filename
         print("Trying to save frame... ", end="")
         while True:
             frame = self.get_frame()

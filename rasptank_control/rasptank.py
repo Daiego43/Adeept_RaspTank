@@ -22,25 +22,25 @@ class Rasptank:
         self.right_wheel = MotorControl.RightWheel()
 
         # Sensor ultrasonido
-        self.ultrasonic_sensor = Ultrasonic.UltrasonicSensor()
+        self.ultrasonic_sensor = Ultrasonic.DistanceSensor()
 
         # Sensor de linea
         self.line_follower = LineFollower.LineFollower()
 
 
-    def move_forward(self, speed=100, radius=1):
+    def move_forward(self, speed=1, radius=1):
         self.left_wheel.forward(speed, radius)
         self.right_wheel.forward(speed, radius)
 
-    def move_backward(self, speed=100, radius=1):
+    def move_backward(self, speed=1, radius=1):
         self.left_wheel.backward(speed, radius)
         self.right_wheel.backward(speed, radius)
 
-    def turn_left(self, speed=100, radius=1):
+    def turn_left(self, speed=1, radius=1):
         self.left_wheel.backward(speed, radius)
         self.right_wheel.forward(speed, radius)
 
-    def turn_right(self, speed=100, radius=1):
+    def turn_right(self, speed=1, radius=1):
         self.left_wheel.forward(speed, radius)
         self.right_wheel.backward(speed, radius)
 
@@ -54,3 +54,8 @@ if __name__ == '__main__':
     rasptank.pinza.motion_goal(0)
     rasptank.move_forward()
     time.sleep(5)
+    rasptank.stop()
+    print(rasptank.ultrasonic_sensor.get_dist())
+    print(rasptank.line_follower.get_status())
+    rasptank.camara.save_frame("test.jpg")
+

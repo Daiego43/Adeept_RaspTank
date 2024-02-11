@@ -1,33 +1,34 @@
+# For some reason,
+# gpiozero library does not work with ultrasonic sensor
+# so we will use RPi.GPIO library
+
 import time
-from gpiozero import OutputDevice, DigitalInputDevice
+import RPi.GPIO as GPIO
 
-
-class UltrasonicSensor:
-    def __init__(self, trigger_pin=17, echo_pin=14):
-        self.trigger = OutputDevice(trigger_pin)
-        self.echo = DigitalInputDevice(echo_pin)
-
-    def get_distance(self):
-        self.trigger.on()
+class DistanceSensor:
+    def __init__(self, triger_pin=11, echo_pin=8):
+        self.triger_pin = triger_pin
+        self.echo_pin = echo_pin
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(triger_pin, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(echo_pin, GPIO.IN)
+    def get_dist(self):       # A function that measures the distance
+        GPIO.output(self.triger_pin, GPIO.HIGH)  # Set the trigger end to high level for 10us
         time.sleep(0.00001)
-        self.trigger.off()
-        start_time = time.time()
-        while not self.echo.is_active:
-            start_time = time.time()
-        while self.echo.is_active:
-            stop_time = time.time()
-        elapsed_time = stop_time - start_time
-        distance = (elapsed_time * 34300) / 2
-        return round(distance, 2)
-
+        GPIO.output(self.triger_pin, GPIO.LOW)
+        while not GPIO.input(self.echo_pin):  # Wait for the echo end to return high level
+            pass
+        t1 = time.time()
+        while GPIO.input(self.echo_pin):  # Wait for the echo end to return high level
+            pass
+        t2 = time.time()
+        return (t2-t1)*340/2*100  # The distance is calculated based on the time difference between the two signals
 
 if __name__ == '__main__':
-    # Asegúrate de ajustar los pines según tu conexión
-    sensor = UltrasonicSensor(trigger_pin=17, echo_pin=14)
+    distance_sensor = DistanceSensor()
     try:
         while True:
-            distance = sensor.get_distance()
-            print(f"Distance: {distance} cm")
+            print("Distance: %.2f cm" % distance_sensor.get_dist())  # Print the distance
             time.sleep(1)
     except KeyboardInterrupt:
-        pass
+        GPIO.cleanup()  # Clean up the GPIO resources
