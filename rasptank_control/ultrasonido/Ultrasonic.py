@@ -1,34 +1,33 @@
 import time
-import RPi.GPIO as GPIO
+from gpiozero import OutputDevice, DigitalInputDevice
 
 
 class UltrasonicSensor:
-    def __init__(self):
-        self.TRIG = 11
-        self.ECHO = 8
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.TRIG, GPIO.OUT, initial=GPIO.LOW)
-        GPIO.setup(self.ECHO, GPIO.IN)
+    def __init__(self, trigger_pin=17, echo_pin=14):
+        self.trigger = OutputDevice(trigger_pin)
+        self.echo = DigitalInputDevice(echo_pin)
 
     def get_distance(self):
-        GPIO.output(self.TRIG, GPIO.HIGH)
+        self.trigger.on()
         time.sleep(0.00001)
-        GPIO.output(self.TRIG, GPIO.LOW)
-        while GPIO.input(self.ECHO) == 0:
-            pulse_start = time.time()
-        while GPIO.input(self.ECHO) == 1:
-            pulse_end = time.time()
-        pulse_duration = pulse_end - pulse_start
-        distance = pulse_duration * 17150
-        distance = round(distance, 2)
-        return distance
+        self.trigger.off()
+        start_time = time.time()
+        while not self.echo.is_active:
+            start_time = time.time()
+        while self.echo.is_active:
+            stop_time = time.time()
+        elapsed_time = stop_time - start_time
+        distance = (elapsed_time * 34300) / 2
+        return round(distance, 2)
 
 
 if __name__ == '__main__':
-    sensor = UltrasonicSensor()
+    # Asegúrate de ajustar los pines según tu conexión
+    sensor = UltrasonicSensor(trigger_pin=17, echo_pin=14)
     try:
         while True:
-            print(sensor.get_distance())
+            distance = sensor.get_distance()
+            print(f"Distance: {distance} cm")
             time.sleep(1)
     except KeyboardInterrupt:
-        GPIO.cleanup()
+        pass

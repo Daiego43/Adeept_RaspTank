@@ -1,6 +1,4 @@
 import cv2
-import time
-
 
 class Camera:
     def __init__(self):
@@ -8,12 +6,21 @@ class Camera:
 
     def get_frame(self):
         success, img = self.cap.read()
-        if not success:
-            return None
-        return img
+        if success:
+            return img
+        return None
+
+    def save_frame(self, filename):
+        print("Trying to save frame... ", end="")
+        while True:
+            frame = self.get_frame()
+            if frame is not None:
+                cv2.imwrite(filename, frame)
+                break
+
+        print("Foto guardada en " + filename)
 
 
 if __name__ == '__main__':
     camara = Camera()
-    frame = camara.get_frame()
-    cv2.imwrite('frame.jpg', frame)
+    camara.save_frame("test.jpg")

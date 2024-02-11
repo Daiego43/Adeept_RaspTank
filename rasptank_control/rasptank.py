@@ -51,5 +51,6 @@ class Rasptank:
 
 if __name__ == '__main__':
     rasptank = Rasptank()
+    rasptank.pinza.motion_goal(0)
     rasptank.move_forward()
     time.sleep(5)
