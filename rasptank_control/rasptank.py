@@ -52,4 +52,4 @@ class Rasptank:
 if __name__ == '__main__':
     rasptank = Rasptank()
     rasptank.move_forward()
-    time.sleep(2)
+    time.sleep(5)

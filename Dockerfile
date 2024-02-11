@@ -1,18 +1,37 @@
-FROM osrf/ros:humble-desktop-full
+FROM ros:humble
 LABEL authors="daiego"
 
-# Configuración SSH
-RUN apt-get update && apt upgrade -y && \
-    apt-get install -y openssh-server && \
-    mkdir /var/run/sshd && \
-    echo 'root:rasptank' | chpasswd && \
-    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd && \
-    echo "export VISIBLE=now" >> /etc/profile \
 
+
+
+# Instalamos utilidades
+RUN apt-get update && \
+    apt-get install -y openssh-server \
+    python3-pip \
+    iproute2 \
+    ranger \
+    libgl1-mesa-glx
+
+# Instalamos dependencias Python3.10 de nuestro proyecto
+# Así las tenemos tambien con las de ROS2
 COPY requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt && rm -rf /requirements.txt
-COPY rasptank_control /rasptank_control
-RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
-EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
+RUN pip3 install -r /requirements.txt && rm -rf /requirements.txt
+VOLUME /dev:/dev
+# Copiamos el script de inicio
+COPY start.sh /start.sh
+RUN rm -rf /ros_entrypoint.sh
+ENTRYPOINT ["/bin/bash", "/start.sh"]
+CMD ["bash"]
+# Definimos al usuario rasptank, que es igual al usuario que se encuentra en la Raspberry Pi
+ARG USER=rasptank
+ARG UID=1000
+ARG GID=$UID
+
+RUN groupadd --gid $GID $USER && \
+    useradd -m -s /bin/bash --uid $UID --gid $GID $USER && \
+    echo "$USER:$USER" | chpasswd && \
+    usermod -aG sudo $USER && \
+    echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER
+
+
+

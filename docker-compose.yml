@@ -1,0 +1,24 @@
+
+
+services:
+  rasptank_developer:
+    image: humble-rasptank:latest
+    container_name: rasptank_developer
+    privileged: true
+    user: rasptank
+    working_dir: /home/rasptank
+    volumes:
+      - /home/daiego/rasptank_control:/home/rasptank/rasptank_control
+    command: ["tail", "-f", "/dev/null"]
+    network_mode: host
+
+  rasptank_root:
+    image: humble-rasptank:latest
+    container_name: rasptank_root
+    privileged: true
+    user: root
+    working_dir: /home/rasptank
+    volumes:
+      - /home/daiego/rasptank_control:/home/rasptank/rasptank_control
+    command: ["tail", "-f", "/dev/null"]
+    network_mode: host
