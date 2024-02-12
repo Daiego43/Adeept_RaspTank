@@ -1,15 +1,15 @@
 
 version: '3'
 services:
-  rasptank_developer:
-    image: humble-rasptank:latest
-    container_name: rasptank_developer
+  rasptank:
+    image: ros:humble-rasptank
+    container_name: rasptank
     privileged: true
     user: rasptank
-    working_dir: /home/rasptank
+    working_dir: /home/rasptank/
     volumes:
       - /dev:/dev
-      - /home/daiego/rasptank_control:/home/rasptank/rasptank_control
+      - /home/daiego/shared:/home/rasptank/
     command: ["tail", "-f", "/dev/null"]
     network_mode: host
     restart: always

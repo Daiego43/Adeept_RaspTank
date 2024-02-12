@@ -14,11 +14,10 @@ RUN groupadd --gid $GID $USER && \
     usermod -aG sudo $USER && \
     echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER && \
     groupadd i2c && \
-    usermod -aG i2c $USER && \
-    echo "source /opt/ros/humble/setup.bash" >> /home/$USER/.bashrc && \
-    echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
-    touch /you_are_inside_a_docker_container
+    usermod -aG i2c $USER
 
+RUN echo "source /opt/ros/humble/setup.bash" >> /home/$USER/.bashrc && \
+    echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
 
 # Instalamos utilidades
 RUN apt-get update && \
