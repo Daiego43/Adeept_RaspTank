@@ -65,7 +65,7 @@ def init_pos_servos():
     muneca = Servo(14, "muneca", min_angle=0, max_angle=180, home_angle=80)
     codo = Servo(13, "codo", min_angle=0, max_angle=135, home_angle=110)
     brazo = Servo(12, "brazo", min_angle=0, max_angle=180, home_angle=120)
-    camara = Servo(11, "camara", min_angle=70, max_angle=120, home_angle=110)
+    camara = Servo(11, "camera", min_angle=70, max_angle=120, home_angle=110)
 
     return pinza, muneca, codo, brazo, camara
 

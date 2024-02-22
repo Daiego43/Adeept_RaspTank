@@ -6,7 +6,7 @@ line_pin_right = 19
 line_pin_middle = 16
 line_pin_left = 20
 
-class LineFollower:
+class MyLineSensor:
     def __init__(self, right_pin=19, middle_pin=16, left_pin=20):
         # Inicializa los sensores de línea
         self.sensor_right = LineSensor(right_pin)

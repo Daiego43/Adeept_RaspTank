@@ -15,8 +15,8 @@ class Motor:
         self.backward_pin.off()
         self.enable_pin.off()
 
-    def backward(self, speed=1, radius=1):
-        self.enable_pin.value = speed * radius
+    def backward(self, speed=1):
+        self.enable_pin.value = speed
         match self.wheel:
             case "left":
                 self.backward_pin.on()
@@ -25,8 +25,8 @@ class Motor:
                 self.forward_pin.on()
                 self.backward_pin.off()
 
-    def forward(self, speed=1, radius=1):
-        self.enable_pin.value = speed * radius
+    def forward(self, speed=1):
+        self.enable_pin.value = speed
         match self.wheel:
             case "left":
                 self.forward_pin.on()

@@ -1,48 +1,48 @@
-from servos import ServoControl
-from motores import MotorControl
-from ultrasonido import Ultrasonic
-from camara import Camera
-from siguelinea import LineFollower
+from servo.Servo import Servo
+from motor.Motor import LeftWheel, RightWheel
+from distancesensor.Ultrasonic import DistanceSensor
+from camera.Camera import Camera
+from linesensor.LineSensor import MyLineSensor
 import time
 
 class Rasptank:
     def __init__(self):
         # Brazo del robot
-        self.pinza = ServoControl.Servo(15, "pinza", min_angle=0, max_angle=90, home_angle=90)
-        self.muneca = ServoControl.Servo(14, "muneca", min_angle=0, max_angle=180, home_angle=80)
-        self.codo = ServoControl.Servo(13, "codo", min_angle=0, max_angle=135, home_angle=110)
-        self.brazo = ServoControl.Servo(12, "brazo", min_angle=0, max_angle=180, home_angle=120)
+        self.link_4 = Servo(15, "end_effector", min_angle=0, max_angle=90, home_angle=90)
+        self.link_3 = Servo(14, "wrist", min_angle=0, max_angle=180, home_angle=80)
+        self.link_2 = Servo(13, "elbow", min_angle=0, max_angle=135, home_angle=110)
+        self.link_1 = Servo(12, "base", min_angle=0, max_angle=180, home_angle=120)
+        self.link_0 = Servo(11, "camera", min_angle=70, max_angle=120, home_angle=110)
 
         # Camara del robot
-        self.servo_camara = ServoControl.Servo(11, "camara", min_angle=70, max_angle=120, home_angle=110)
-        self.camara = Camera.Camera()
+        self.video = Camera()
 
         # Ruedas del robot
-        self.left_wheel = MotorControl.LeftWheel()
-        self.right_wheel = MotorControl.RightWheel()
+        self.left_wheel = LeftWheel()
+        self.right_wheel = RightWheel()
 
-        # Sensor ultrasonido
-        self.ultrasonic_sensor = Ultrasonic.DistanceSensor()
+        # Sensor distancesensor
+        self.ultrasonic_sensor = DistanceSensor()
 
         # Sensor de linea
-        self.line_follower = LineFollower.LineFollower()
+        self.line_follower = MyLineSensor()
 
 
-    def move_forward(self, speed=1, radius=1):
-        self.left_wheel.forward(speed, radius)
-        self.right_wheel.forward(speed, radius)
+    def move_forward(self, left_speed=1, right_speed=1):
+        self.left_wheel.forward(left_speed)
+        self.right_wheel.forward(right_speed)
 
-    def move_backward(self, speed=1, radius=1):
-        self.left_wheel.backward(speed, radius)
-        self.right_wheel.backward(speed, radius)
+    def move_backward(self, left_speed=1, right_speed=1):
+        self.left_wheel.backward(left_speed)
+        self.right_wheel.backward(right_speed)
 
-    def turn_left(self, speed=1, radius=1):
-        self.left_wheel.backward(speed, radius)
-        self.right_wheel.forward(speed, radius)
+    def turn_left(self, left_speed=1, right_speed=1):
+        self.left_wheel.backward(left_speed)
+        self.right_wheel.forward(right_speed)
 
-    def turn_right(self, speed=1, radius=1):
-        self.left_wheel.forward(speed, radius)
-        self.right_wheel.backward(speed, radius)
+    def turn_right(self, left_speed=1, right_speed=1):
+        self.left_wheel.forward(left_speed)
+        self.right_wheel.backward(right_speed)
 
     def stop(self):
         self.left_wheel.stop()
@@ -51,11 +51,11 @@ class Rasptank:
 
 if __name__ == '__main__':
     rasptank = Rasptank()
-    rasptank.pinza.motion_goal(0)
+    rasptank.link_0.motion_goal(0)
     rasptank.move_forward()
     time.sleep(5)
     rasptank.stop()
     print(rasptank.ultrasonic_sensor.get_dist())
     print(rasptank.line_follower.get_status())
-    rasptank.camara.save_frame("test.jpg")
+    rasptank.video.save_frame("test.jpg")
 
