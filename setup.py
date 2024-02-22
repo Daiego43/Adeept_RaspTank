@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='rasptank',
+    name='rasptank-control',
     version='0.0.0',
     author='Daiego43',
     author_email='diedelcha@gmail.com',
