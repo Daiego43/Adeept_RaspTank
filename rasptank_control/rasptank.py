@@ -5,6 +5,7 @@ from camera.Camera import Camera
 from linesensor.LineSensor import MyLineSensor
 import time
 
+
 class Rasptank:
     def __init__(self):
         # Brazo del robot
@@ -26,36 +27,3 @@ class Rasptank:
 
         # Sensor de linea
         self.line_follower = MyLineSensor()
-
-
-    def move_forward(self, left_speed=1, right_speed=1):
-        self.left_wheel.forward(left_speed)
-        self.right_wheel.forward(right_speed)
-
-    def move_backward(self, left_speed=1, right_speed=1):
-        self.left_wheel.backward(left_speed)
-        self.right_wheel.backward(right_speed)
-
-    def turn_left(self, left_speed=1, right_speed=1):
-        self.left_wheel.backward(left_speed)
-        self.right_wheel.forward(right_speed)
-
-    def turn_right(self, left_speed=1, right_speed=1):
-        self.left_wheel.forward(left_speed)
-        self.right_wheel.backward(right_speed)
-
-    def stop(self):
-        self.left_wheel.stop()
-        self.right_wheel.stop()
-
-
-if __name__ == '__main__':
-    rasptank = Rasptank()
-    rasptank.link_0.motion_goal(0)
-    rasptank.move_forward()
-    time.sleep(5)
-    rasptank.stop()
-    print(rasptank.ultrasonic_sensor.get_dist())
-    print(rasptank.line_follower.get_status())
-    rasptank.video.save_frame("test.jpg")
-
