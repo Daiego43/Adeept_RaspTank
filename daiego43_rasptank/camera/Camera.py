@@ -11,7 +11,7 @@ class Camera:
         return None
 
     def save_frame(self, filename):
-        filename = "/tmp/pycharm_project_514/daiego43-rasptank-control/camera/" + filename
+        filename = "/tmp/pycharm_project_514/daiego43_rasptank/camera/" + filename
         print("Trying to save frame... ", end="")
         while True:
             frame = self.get_frame()
