@@ -1,8 +1,8 @@
 import cv2
 
 class Camera:
-    def __init__(self):
-        self.cap = cv2.VideoCapture(0)
+    def __init__(self, video_source=0):
+        self.cap = cv2.VideoCapture(video_source)
 
     def get_frame(self):
         success, img = self.cap.read()

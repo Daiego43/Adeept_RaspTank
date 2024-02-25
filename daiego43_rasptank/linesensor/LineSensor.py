@@ -22,7 +22,7 @@ class MyLineSensor:
         return status_right, status_middle, status_left
 
 if __name__ == "__main__":
-    line_follower = LineFollower()
+    line_follower = MyLineSensor()
     while True:
         status_right, status_middle, status_left = line_follower.get_status()
         print(f"Right: {status_right}, Middle: {status_middle}, Left: {status_left}")
