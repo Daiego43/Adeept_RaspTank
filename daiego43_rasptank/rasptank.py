@@ -1,8 +1,8 @@
-from servo.Servo import Servo
-from motor.Motor import LeftWheel, RightWheel
-from distancesensor.Ultrasonic import DistanceSensor
-from camera.Camera import Camera
-from linesensor.LineSensor import MyLineSensor
+from daiego43_rasptank.servo.Servo import Servo
+from daiego43_rasptank.motor.Motor import LeftWheel, RightWheel
+from daiego43_rasptank.distancesensor.Ultrasonic import DistanceSensor
+from daiego43_rasptank.camera.Camera import Camera
+from daiego43_rasptank.linesensor.LineSensor import MyLineSensor
 
 
 class Rasptank:
