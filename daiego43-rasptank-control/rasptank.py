@@ -3,7 +3,6 @@ from motor.Motor import LeftWheel, RightWheel
 from distancesensor.Ultrasonic import DistanceSensor
 from camera.Camera import Camera
 from linesensor.LineSensor import MyLineSensor
-import time
 
 
 class Rasptank:
@@ -27,3 +26,6 @@ class Rasptank:
 
         # Sensor de linea
         self.line_follower = MyLineSensor()
+
+if __name__ == '__main__':
+    rasptank = Rasptank()

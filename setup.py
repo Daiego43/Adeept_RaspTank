@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='rasptank-control',
+    name='daiego43-rasptank-control',
     version='0.0.0',
     author='Daiego43',
     author_email='diedelcha@gmail.com',
-    description='This is a clearer implementation of a library to interact with the Adeept rasptank robot.',
+    description='This is a clearer implementation of a library to interact with the Adeept rasptank robot. Pins are hardcoded',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/Daiego43/Adeept_RaspTank',
