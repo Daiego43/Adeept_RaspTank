@@ -8,7 +8,7 @@ To install:
 pip install daiego43_rasptank
 ```
 
-## Rasptan Control
+## Rasptank Control
 To control the rasptank you can use the following methods:
 ```python
 from daiego43_rasptank.rasptank import Rasptank
@@ -40,6 +40,14 @@ class Rasptank:
         self.line_follower = MyLineSensor()
 ```
 
-5 servos, 2 wheels, 1 camera, 1 ultrasonic sensor and 1 line sensor. The LEDs are not implemented.
+5 servos, 2 wheels, 1 camera, 1 ultrasonic sensor and 1 line sensor. The LEDs are not implemented bc I had to remove 
+them from my unit.
 Also all these classes are my own implementation and might have some errors.
-But we can essentially get and set every sensor in the robot with some .
+But we can essentially get and set every sensor in the robot with a more friendly interface.
+
+## Comments
+Since for me this package is ready to be used with my own robot, now I am continuing with the ROS implementation.
+If you reading this, would like to install this software or test it on your own robot, please let me know or contact me
+and we can work together to make this package better for everyone :).
+
+Now I am working on a ROS package that essentially publishes sensor info and subscribes to the wheels and servos to control the robot. I think that will be a separate package.

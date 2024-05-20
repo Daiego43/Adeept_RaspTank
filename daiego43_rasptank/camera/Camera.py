@@ -5,6 +5,9 @@ class Camera:
         self.cap = cv2.VideoCapture(video_source)
 
     def get_frame(self):
+        """
+        return a frame from the camera
+        """
         success, img = self.cap.read()
         if success:
             return img

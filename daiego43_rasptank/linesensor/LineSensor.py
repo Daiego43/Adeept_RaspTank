@@ -13,7 +13,7 @@ class MyLineSensor:
         self.sensor_middle = LineSensor(middle_pin)
         self.sensor_left = LineSensor(left_pin)
 
-    def get_status(self):
+    def get_data(self):
         # Obtiene el estado de cada sensor
         # True indica línea detectada; False indica línea no detectada
         status_right = self.sensor_right.value
@@ -24,6 +24,6 @@ class MyLineSensor:
 if __name__ == "__main__":
     line_follower = MyLineSensor()
     while True:
-        status_right, status_middle, status_left = line_follower.get_status()
+        status_right, status_middle, status_left = line_follower.get_data()
         print(f"Right: {status_right}, Middle: {status_middle}, Left: {status_left}")
         time.sleep(0.1)

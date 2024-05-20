@@ -16,7 +16,7 @@ class Singleton:
 
 
 class Rasptank(Singleton):
-    def __init__(self, video_source=0):
+    def __init__(self):
         if self._initialized: return
         self._initialized = True
         # Brazo del robot
@@ -27,7 +27,7 @@ class Rasptank(Singleton):
         self.link_0 = Servo(11, "camera", min_angle=70, max_angle=120, home_angle=110)
 
         # Camara del robot
-        self.video = Camera(video_source)
+        self.video = Camera()
 
         # Ruedas del robot
         self.left_wheel = LeftWheel()
@@ -39,13 +39,15 @@ class Rasptank(Singleton):
         # Sensor de linea
         self.line_follower = MyLineSensor()
 
+    def get_line_follower_data(self):
+        return self.line_follower.get_data()
+
+    def get_ultrasonic_sensor_data(self):
+        return self.ultrasonic_sensor.get_data()
+
+    def get_camera_frame(self):
+        return self.video.get_frame()
 
 if __name__ == '__main__':
     rasptank = Rasptank()
-    rasptank2 = Rasptank()
-    rasptank3 = Rasptank()
-    rasptank4 = Rasptank()
-    print(rasptank3 is rasptank4)
-    print(rasptank is rasptank2)
-    print(rasptank is rasptank3)
-    print(rasptank is rasptank4)
+    rasptank.video.save_frame("test.jpg")

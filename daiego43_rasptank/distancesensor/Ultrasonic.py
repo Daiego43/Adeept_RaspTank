@@ -12,7 +12,10 @@ class DistanceSensor:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(triger_pin, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(echo_pin, GPIO.IN)
-    def get_dist(self):       # A function that measures the distance
+    def get_data(self):       # A function that measures the distance
+        """
+        Data returned is distance in cm
+        """
         GPIO.output(self.triger_pin, GPIO.HIGH)  # Set the trigger end to high level for 10us
         time.sleep(0.00001)
         GPIO.output(self.triger_pin, GPIO.LOW)
@@ -28,7 +31,7 @@ if __name__ == '__main__':
     distance_sensor = DistanceSensor()
     try:
         while True:
-            print("Distance: %.2f cm" % distance_sensor.get_dist())  # Print the distance
+            print("Distance: %.2f cm" % distance_sensor.get_data())  # Print the distance
             time.sleep(1)
     except KeyboardInterrupt:
         GPIO.cleanup()  # Clean up the GPIO resources
