@@ -48,6 +48,7 @@ class Rasptank(Singleton):
     def get_camera_frame(self):
         return self.video.get_frame()
 
+
 if __name__ == '__main__':
     rasptank = Rasptank()
     rasptank.video.save_frame("test.jpg")
