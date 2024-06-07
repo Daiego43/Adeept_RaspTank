@@ -13,8 +13,8 @@ class Camera:
             return img
         return None
 
-    def save_frame(self, filename):
-        filename = "/tmp/pycharm_project_514/daiego43_rasptank/camera/" + filename
+    def save_frame(self, output_path):
+        filename = output_path
         print("Trying to save frame... ", end="")
         while True:
             frame = self.get_frame()

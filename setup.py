@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='daiego43_rasptank',
-    version='0.0.5',
+    version='0.0.6',
     author='Daiego43',
     author_email='diedelcha@gmail.com',
     description='This is a clearer implementation of a library to interact with the Adeept rasptank robot. Pins are hardcoded',
