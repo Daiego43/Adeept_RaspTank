@@ -1,6 +1,7 @@
 from gpiozero import OutputDevice, PWMOutputDevice
 import time
 
+
 class Motor:
     def __init__(self, wheel, pin1, pin2, en):
         self.wheel = wheel
@@ -14,6 +15,14 @@ class Motor:
         self.forward_pin.off()
         self.backward_pin.off()
         self.enable_pin.off()
+
+    def move(self, speed=0):
+        if speed < 0:
+            self.backward(speed)
+        elif speed > 0:
+            self.forward(speed)
+        else:
+            self.stop()
 
     def backward(self, speed=1):
         self.enable_pin.value = speed
@@ -35,9 +44,11 @@ class Motor:
                 self.backward_pin.on()
                 self.forward_pin.off()
 
+
 class LeftWheel(Motor):
     def __init__(self):
         super().__init__("left", 27, 18, 17)
+
 
 class RightWheel(Motor):
     def __init__(self):

@@ -37,7 +37,7 @@ class Rasptank(Singleton):
         self.ultrasonic_sensor = DistanceSensor()
 
         # Sensor de linea
-        self.line_follower = MyLineSensor()
+        self.line_sensor = MyLineSensor()
 
     def get_line_follower_data(self):
         return self.line_follower.get_data()
