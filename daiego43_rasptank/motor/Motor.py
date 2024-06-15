@@ -18,6 +18,7 @@ class Motor:
 
     def move(self, speed=0):
         if speed < 0:
+            speed *= -1
             self.backward(speed)
         elif speed > 0:
             self.forward(speed)
