@@ -19,11 +19,11 @@ class MyLineSensor:
         status_right = self.sensor_right.value
         status_middle = self.sensor_middle.value
         status_left = self.sensor_left.value
-        return status_right, status_middle, status_left
+        return status_left, status_middle, status_right
 
 if __name__ == "__main__":
     line_follower = MyLineSensor()
     while True:
-        status_right, status_middle, status_left = line_follower.get_data()
+        status_left, status_middle, status_right = line_follower.get_data()
         print(f"Right: {status_right}, Middle: {status_middle}, Left: {status_left}")
         time.sleep(0.1)
